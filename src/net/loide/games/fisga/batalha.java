@@ -12,6 +12,9 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -108,6 +111,27 @@ public class batalha extends Activity {
 		soundPool.play(soundPoolMap.get(sound), streamVolume, streamVolume, 1, 0, 1f);
 	}
 
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.menu, menu);
+	    return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	    case R.id.new_game:
+	        //newGame();
+	        return true;
+	    case R.id.help:
+	        //showHelp();
+	        return true;
+	    case R.id.exit:
+	        this.finish();
+	    default:
+	        return super.onOptionsItemSelected(item);
+	    }
+	}	
 
 	/*
 	 * public void onClick(View v) { if (v == button) { vibrator.vibrate(500); }

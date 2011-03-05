@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:visible="true" android:checkable="false" android:title="Novo Jogo" android:menuCategory="container" android:enabled="true" android:id="@+id/new_game"></item>
+    <item android:visible="true" android:checkable="false" android:enabled="true" android:title="Opções" android:menuCategory="container" android:id="@+id/options"></item><item android:visible="true" android:checkable="false" android:title="Help" android:enabled="true" android:id="@+id/help"></item>
+    <item android:visible="true" android:checkable="false" android:enabled="true" android:title="Sair" android:menuCategory="container" android:id="@+id/exit"></item>
+    
+</menu>
