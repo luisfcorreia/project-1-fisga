@@ -8,8 +8,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.media.AudioManager;
-import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.Menu;
@@ -17,6 +15,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.media.AudioManager;
+import android.media.SoundPool;
 
 public class Fisga_main extends Activity {
 	TextView textviewAzimuth, textviewPitch, textviewRoll;
@@ -27,6 +27,11 @@ public class Fisga_main extends Activity {
 	private static SensorManager mySensorManager;
 	private boolean sensorrunning;
 	private Vibrator vibrator;
+	private static SoundPool soundPool;
+	private static HashMap<Integer, Integer> soundPoolMap;
+	public static final int SOUND_EXPLOSION = 1;
+	public static final int SOUND_YOU_WIN = 2;
+	public static final int SOUND_YOU_LOSE = 3;
 
 	
 	/** Called when the activity is first created. */
@@ -43,8 +48,8 @@ public class Fisga_main extends Activity {
 		Toast.makeText(this, "movement sensor tests", Toast.LENGTH_LONG).show();
 		
 		vibrator.cancel();
-		
-		Utils.initSounds();
+
+		initSounds();
 
 		mySensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		List<Sensor> mySensors = mySensorManager
@@ -75,7 +80,7 @@ public class Fisga_main extends Activity {
 			
 			if (last_y-y > 5) {
 				vibrator.vibrate(100);
-				Utils.playSound(SOUND_EXPLOSION);
+				playSound(SOUND_EXPLOSION);
 			}
 			last_y = y;
 
@@ -116,6 +121,19 @@ public class Fisga_main extends Activity {
 	    }
 	}	
 
+	  private void initSounds() {
+		    soundPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 100);
+		    soundPoolMap = new HashMap<Integer, Integer>();
+		    soundPoolMap.put(SOUND_EXPLOSION, soundPool.load(getBaseContext(), R.raw.laser_1, 1));
+		  }
+		      
+		  public void playSound(int sound) {
+		    AudioManager mgr = (AudioManager)getBaseContext().getSystemService(Context.AUDIO_SERVICE);
+		    int streamVolume = mgr.getStreamVolume(AudioManager.STREAM_MUSIC);
+		    soundPool.play(soundPoolMap.get(sound), streamVolume, streamVolume, 1, 0, 1f);
+		  }
+	
+	
 	/*
 	 * public void onClick(View v) { if (v == button) { vibrator.vibrate(500); }
 	 * }
