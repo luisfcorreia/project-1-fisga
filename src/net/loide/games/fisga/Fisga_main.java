@@ -67,6 +67,7 @@ public class Fisga_main extends Activity {
 		vibrator.cancel();
 
 		remote_server = "77.54.114.206";
+		mood_change = 10;
 
 		if (!connected) {
 			serverIpAddress = remote_server;
@@ -108,11 +109,7 @@ public class Fisga_main extends Activity {
 			y = Math.round(event.values[1]);
 			z = Math.round(event.values[2]);
 
-			if (last_y - y > mood_change) {
-				vibrator.vibrate(10);
-				playSound(SOUND_EXPLOSION);
-			}
-			if (last_y + y > mood_change) {
+			if ((last_y - y > mood_change)) {
 				vibrator.vibrate(10);
 				playSound(SOUND_EXPLOSION);
 			}
