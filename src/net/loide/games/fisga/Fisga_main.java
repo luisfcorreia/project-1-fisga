@@ -33,6 +33,7 @@ public class Fisga_main extends Activity {
 	private static HashMap<Integer, Integer> soundPoolMap;
 	private static String remote_server;
 	private static String message;
+	private int mood_change;
 
 	public static final int SOUND_EXPLOSION = 1;
 	public static final int SOUND_YOU_WIN = 2;
@@ -107,13 +108,17 @@ public class Fisga_main extends Activity {
 			y = Math.round(event.values[1]);
 			z = Math.round(event.values[2]);
 
-			if (last_y - y > 5) {
-				vibrator.vibrate(100);
+			if (last_y - y > mood_change) {
+				vibrator.vibrate(10);
+				playSound(SOUND_EXPLOSION);
+			}
+			if (last_y + y > mood_change) {
+				vibrator.vibrate(10);
 				playSound(SOUND_EXPLOSION);
 			}
 			last_y = y;
 
-			message = String.valueOf((int) y);
+			message = String.valueOf((int) 180-y);
 
 			textviewAzimuth.setText("Azimuth: " + String.valueOf(x));
 			textviewPitch.setText("Pitch: " + String.valueOf(y));
