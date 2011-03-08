@@ -40,6 +40,7 @@ public class Fisga_main extends Activity {
 	public static final int SOUND_YOU_LOSE = 3;
 
 	private String serverIpAddress = "192.168.69.2";
+	private int serverPort = 8169;
 	private boolean connected = false;
 
 	TextView textviewAzimuth, textviewPitch, textviewRoll, textviewMsg;
@@ -52,9 +53,9 @@ public class Fisga_main extends Activity {
 
 		super.onCreate(savedInstanceState);
 
-		System.setProperty("java.net.preferIPv6Addresses", "false");		
-		System.setProperty("java.net.preferIPv4Addresses", "true");		
-		
+		System.setProperty("java.net.preferIPv6Addresses", "false");
+		System.setProperty("java.net.preferIPv4Addresses", "true");
+
 		setContentView(R.layout.main);
 		textviewAzimuth = (TextView) findViewById(R.id.textazimuth);
 		textviewPitch = (TextView) findViewById(R.id.textpitch);
@@ -66,8 +67,8 @@ public class Fisga_main extends Activity {
 
 		vibrator.cancel();
 
-		remote_server = "77.54.114.206";
-		mood_change = 10;
+		remote_server = "lfcorreia.dyndns.org";
+		remote_server = "192.168.69.2";
 
 		if (!connected) {
 			serverIpAddress = remote_server;
@@ -109,13 +110,13 @@ public class Fisga_main extends Activity {
 			y = Math.round(event.values[1]);
 			z = Math.round(event.values[2]);
 
-			if ((last_y - y > mood_change)) {
+			if (last_y - y > mood_change) {
 				vibrator.vibrate(10);
 				playSound(SOUND_EXPLOSION);
 			}
 			last_y = y;
 
-			message = String.valueOf((int) 180-y);
+			message = String.valueOf((int) (Math.abs(y)));
 
 			textviewAzimuth.setText("Azimuth: " + String.valueOf(x));
 			textviewPitch.setText("Pitch: " + String.valueOf(y));
@@ -137,7 +138,7 @@ public class Fisga_main extends Activity {
 			try {
 				InetAddress serverAddr = InetAddress.getByName(serverIpAddress);
 				Log.d("ClientActivity", "C: Connecting...");
-				Socket socket = new Socket(serverAddr, 8118);
+				Socket socket = new Socket(serverAddr, serverPort);
 				connected = true;
 				while (connected) {
 					try {
@@ -209,7 +210,10 @@ public class Fisga_main extends Activity {
 			mySensorManager.unregisterListener(mySensorEventListener);
 			Toast.makeText(Fisga_main.this, "unregisterListener",
 					Toast.LENGTH_SHORT).show();
+			sensorrunning = false;
+			connected = false;
 		}
+
 	}
 
 }
