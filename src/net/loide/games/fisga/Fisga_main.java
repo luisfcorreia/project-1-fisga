@@ -80,14 +80,26 @@ public class Fisga_main extends Activity {
 
 		initSounds();
 		message = "0";
+		mood_change = 10;
+		
 
 		mySensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		List<Sensor> mySensors = mySensorManager
 				.getSensorList(Sensor.TYPE_ORIENTATION);
 
 		if (mySensors.size() > 0) {
-			mySensorManager.registerListener(mySensorEventListener, mySensors
-					.get(0), SensorManager.SENSOR_DELAY_NORMAL);
+			
+            /*
+             * It is not necessary to get accelerometer events at a very high
+             * rate, by using a slower rate (SENSOR_DELAY_UI), we get an
+             * automatic low-pass filter, which "extracts" the gravity component
+             * of the acceleration. As an added benefit, we use less power and
+             * CPU resources.
+             */
+		
+//			mySensorManager.registerListener(mySensorEventListener, mySensors.get(0), SensorManager.SENSOR_DELAY_NORMAL);
+			mySensorManager.registerListener(mySensorEventListener, mySensors.get(0), SensorManager.SENSOR_DELAY_UI);
+
 			sensorrunning = true;
 			// Toast.makeText(this, "Start ORIENTATION Sensor",
 			// Toast.LENGTH_LONG).show();
