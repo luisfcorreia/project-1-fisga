@@ -10,6 +10,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -20,12 +21,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.media.AudioManager;
 import android.media.SoundPool;
 
-public class Fisga_main extends Activity {
+public class Fisga_main extends Activity implements OnClickListener {
 	private static SensorManager mySensorManager;
 	private boolean sensorrunning;
 	private Vibrator vibrator;
@@ -52,6 +56,7 @@ public class Fisga_main extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
+		// requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		System.setProperty("java.net.preferIPv6Addresses", "false");
 		System.setProperty("java.net.preferIPv4Addresses", "true");
@@ -69,6 +74,7 @@ public class Fisga_main extends Activity {
 
 		remote_server = "lfcorreia.dyndns.org";
 		remote_server = "192.168.69.2";
+		remote_server = "193.137.224.184";
 
 		if (!connected) {
 			serverIpAddress = remote_server;
@@ -81,28 +87,29 @@ public class Fisga_main extends Activity {
 		initSounds();
 		message = "0";
 		mood_change = 10;
-		
+
+		Button button = (Button) findViewById(R.id.button1);
+		button.setOnClickListener(this);
 
 		mySensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		List<Sensor> mySensors = mySensorManager
 				.getSensorList(Sensor.TYPE_ORIENTATION);
 
 		if (mySensors.size() > 0) {
-			
-            /*
-             * It is not necessary to get accelerometer events at a very high
-             * rate, by using a slower rate (SENSOR_DELAY_UI), we get an
-             * automatic low-pass filter, which "extracts" the gravity component
-             * of the acceleration. As an added benefit, we use less power and
-             * CPU resources.
-             */
-		
-//			mySensorManager.registerListener(mySensorEventListener, mySensors.get(0), SensorManager.SENSOR_DELAY_NORMAL);
-			mySensorManager.registerListener(mySensorEventListener, mySensors.get(0), SensorManager.SENSOR_DELAY_UI);
+
+			/*
+			 * It is not necessary to get accelerometer events at a very high
+			 * rate, by using a slower rate (SENSOR_DELAY_UI), we get an
+			 * automatic low-pass filter, which "extracts" the gravity component
+			 * of the acceleration. As an added benefit, we use less power and
+			 * CPU resources.
+			 */
+
+			mySensorManager.registerListener(mySensorEventListener, mySensors
+					.get(0), SensorManager.SENSOR_DELAY_UI);
 
 			sensorrunning = true;
-			// Toast.makeText(this, "Start ORIENTATION Sensor",
-			// Toast.LENGTH_LONG).show();
+
 		} else {
 			Toast.makeText(this, "No ORIENTATION Sensor", Toast.LENGTH_LONG)
 					.show();
@@ -110,6 +117,18 @@ public class Fisga_main extends Activity {
 			finish();
 		}
 
+	}
+
+	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		IntentResult scanResult = IntentIntegrator.parseActivityResult(
+				requestCode, resultCode, intent);
+		if (scanResult != null) {
+			// handle scan result
+			Toast.makeText(this, "resultado:" + scanResult.getContents(),
+					Toast.LENGTH_LONG).show();
+		}
+		// else continue with any other code you need in the method
+		// ...
 	}
 
 	private SensorEventListener mySensorEventListener = new SensorEventListener() {
@@ -226,6 +245,12 @@ public class Fisga_main extends Activity {
 			connected = false;
 		}
 
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		IntentIntegrator.initiateScan(this);
 	}
 
 }
