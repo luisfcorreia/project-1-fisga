@@ -22,7 +22,22 @@
     android:layout_height="wrap_content" 
     android:text="Roll: "
     />
-<TextView android:layout_height="wrap_content" android:text="TextView" android:layout_width="wrap_content" android:editable="false" android:id="@+id/dados"></TextView>
-<Button android:id="@+id/button1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="--- Vibrate ---"></Button>
-<TextView android:text="TextView" android:id="@+id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+<TextView 
+	android:layout_height="wrap_content" 
+	android:layout_width="wrap_content" 
+	android:editable="false" 
+	android:id="@+id/dados" 
+	android:text="message"
+	/>
+<Button 
+	android:id="@+id/button1" 
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content" 
+	android:text="--- Vibrate ---"
+	/>
+<TextView 
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content" 
+	android:id="@+id/textURL" 
+	android:text="URL"/>
 </LinearLayout>

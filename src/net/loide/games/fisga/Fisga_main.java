@@ -37,6 +37,7 @@ public class Fisga_main extends Activity implements OnClickListener {
 	private static HashMap<Integer, Integer> soundPoolMap;
 	private static String remote_server;
 	private static String message;
+	private static String scannedURL;
 	private int mood_change;
 
 	public static final int SOUND_EXPLOSION = 1;
@@ -47,7 +48,7 @@ public class Fisga_main extends Activity implements OnClickListener {
 	private int serverPort = 8169;
 	private boolean connected = false;
 
-	TextView textviewAzimuth, textviewPitch, textviewRoll, textviewMsg;
+	TextView textviewAzimuth, textviewPitch, textviewRoll, textviewMsg, textviewURL;
 	float x, y, z;
 	float last_x = 0, last_y = 0;
 
@@ -66,6 +67,7 @@ public class Fisga_main extends Activity implements OnClickListener {
 		textviewPitch = (TextView) findViewById(R.id.textpitch);
 		textviewRoll = (TextView) findViewById(R.id.textroll);
 		textviewMsg = (TextView) findViewById(R.id.dados);
+		textviewURL = (TextView) findViewById(R.id.textURL);
 		vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
 		Toast.makeText(this, "movement sensor tests", Toast.LENGTH_LONG).show();
@@ -74,7 +76,7 @@ public class Fisga_main extends Activity implements OnClickListener {
 
 		remote_server = "lfcorreia.dyndns.org";
 		remote_server = "192.168.69.2";
-		remote_server = "193.137.224.184";
+//		remote_server = "193.137.224.184";
 
 		if (!connected) {
 			serverIpAddress = remote_server;
@@ -124,11 +126,12 @@ public class Fisga_main extends Activity implements OnClickListener {
 				requestCode, resultCode, intent);
 		if (scanResult != null) {
 			// handle scan result
-			Toast.makeText(this, "resultado:" + scanResult.getContents(),
+			scannedURL = scanResult.getContents() + " - " + scanResult.getFormatName();
+			
+			textviewURL.setText(scannedURL);
+			Toast.makeText(this, scannedURL,
 					Toast.LENGTH_LONG).show();
 		}
-		// else continue with any other code you need in the method
-		// ...
 	}
 
 	private SensorEventListener mySensorEventListener = new SensorEventListener() {
@@ -159,7 +162,6 @@ public class Fisga_main extends Activity implements OnClickListener {
 		@Override
 		public void onAccuracyChanged(Sensor sensor, int accuracy) {
 			// TODO Auto-generated method stub
-
 		}
 	};
 
@@ -244,12 +246,11 @@ public class Fisga_main extends Activity implements OnClickListener {
 			sensorrunning = false;
 			connected = false;
 		}
-
 	}
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
+		// Lançar o Barcode Scanner
 		IntentIntegrator.initiateScan(this);
 	}
 

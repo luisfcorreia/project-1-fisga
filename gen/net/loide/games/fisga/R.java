@@ -16,10 +16,11 @@ public final class R {
     public static final class id {
         public static final int button1=0x7f070004;
         public static final int dados=0x7f070003;
-        public static final int exit=0x7f070009;
-        public static final int help=0x7f070008;
-        public static final int new_game=0x7f070006;
-        public static final int options=0x7f070007;
+        public static final int exit=0x7f07000a;
+        public static final int help=0x7f070009;
+        public static final int new_game=0x7f070007;
+        public static final int options=0x7f070008;
+        public static final int textURL=0x7f070006;
         public static final int textView1=0x7f070005;
         public static final int textazimuth=0x7f070000;
         public static final int textpitch=0x7f070001;
