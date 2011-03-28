@@ -35,10 +35,9 @@ public class Fisga_main extends Activity implements OnClickListener {
 	private Vibrator vibrator;
 	private static SoundPool soundPool;
 	private static HashMap<Integer, Integer> soundPoolMap;
-	private static String remote_server;
 	private static String message;
-	private static String scannedURL;
 	private int mood_change;
+	private Thread cThread;
 
 	public static final int SOUND_EXPLOSION = 1;
 	public static final int SOUND_YOU_WIN = 2;
@@ -48,7 +47,7 @@ public class Fisga_main extends Activity implements OnClickListener {
 	private int serverPort = 8169;
 	private boolean connected = false;
 
-	TextView textviewAzimuth, textviewPitch, textviewRoll, textviewMsg, textviewURL;
+	TextView textviewAzimuth, textviewPitch, textviewRoll, textviewMsg;
 	float x, y, z;
 	float last_x = 0, last_y = 0;
 
@@ -59,37 +58,21 @@ public class Fisga_main extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		// requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-		System.setProperty("java.net.preferIPv6Addresses", "false");
-		System.setProperty("java.net.preferIPv4Addresses", "true");
-
 		setContentView(R.layout.main);
 		textviewAzimuth = (TextView) findViewById(R.id.textazimuth);
 		textviewPitch = (TextView) findViewById(R.id.textpitch);
 		textviewRoll = (TextView) findViewById(R.id.textroll);
 		textviewMsg = (TextView) findViewById(R.id.dados);
-		textviewURL = (TextView) findViewById(R.id.textURL);
 		vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-
-		Toast.makeText(this, "movement sensor tests", Toast.LENGTH_LONG).show();
-
 		vibrator.cancel();
 
-		remote_server = "lfcorreia.dyndns.org";
-		remote_server = "192.168.69.2";
-//		remote_server = "193.137.224.184";
-
-		if (!connected) {
-			serverIpAddress = remote_server;
-			if (!serverIpAddress.equals("")) {
-				Thread cThread = new Thread(new ClientThread());
-				cThread.start();
-			}
-		}
+		// Toast.makeText(this, "movement sensor tests",
+		// Toast.LENGTH_LONG).show();
 
 		initSounds();
 		message = "0";
 		mood_change = 10;
-
+		
 		Button button = (Button) findViewById(R.id.button1);
 		button.setOnClickListener(this);
 
@@ -99,16 +82,9 @@ public class Fisga_main extends Activity implements OnClickListener {
 
 		if (mySensors.size() > 0) {
 
-			/*
-			 * It is not necessary to get accelerometer events at a very high
-			 * rate, by using a slower rate (SENSOR_DELAY_UI), we get an
-			 * automatic low-pass filter, which "extracts" the gravity component
-			 * of the acceleration. As an added benefit, we use less power and
-			 * CPU resources.
-			 */
-
-			mySensorManager.registerListener(mySensorEventListener, mySensors
-					.get(0), SensorManager.SENSOR_DELAY_UI);
+			mySensorManager.registerListener(mySensorEventListener,
+					mySensors.get(0), SensorManager.SENSOR_DELAY_GAME);
+			// .get(0), SensorManager.SENSOR_DELAY_UI);
 
 			sensorrunning = true;
 
@@ -119,6 +95,13 @@ public class Fisga_main extends Activity implements OnClickListener {
 			finish();
 		}
 
+		if (!connected) {
+			if (!serverIpAddress.equals("")) {
+				cThread = new Thread(new ClientThread());
+				cThread.setDaemon(true);
+			}
+		}
+
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -126,19 +109,22 @@ public class Fisga_main extends Activity implements OnClickListener {
 				requestCode, resultCode, intent);
 		if (scanResult != null) {
 			// handle scan result
-			scannedURL = scanResult.getContents() + " - " + scanResult.getFormatName();
-			
-			textviewURL.setText(scannedURL);
-			Toast.makeText(this, scannedURL,
+			connected = false;
+			serverIpAddress = scanResult.getContents().trim();
+			cThread.start();
+			connected = true;
+
+			Toast.makeText(this, "resultado:" + scanResult.getContents(),
 					Toast.LENGTH_LONG).show();
 		}
+		// else continue with any other code you need in the method
+		// ...
 	}
 
 	private SensorEventListener mySensorEventListener = new SensorEventListener() {
 
 		@Override
 		public void onSensorChanged(SensorEvent event) {
-			// TODO Auto-generated method stub
 
 			x = Math.round(event.values[0]);
 			y = Math.round(event.values[1]);
@@ -154,7 +140,8 @@ public class Fisga_main extends Activity implements OnClickListener {
 
 			textviewAzimuth.setText("Azimuth: " + String.valueOf(x));
 			textviewPitch.setText("Pitch: " + String.valueOf(y));
-			textviewRoll.setText("Roll: " + String.valueOf(z));
+			// textviewRoll.setText("Roll: " + String.valueOf(z));
+			textviewRoll.setText("server IP: " + serverIpAddress);
 			textviewMsg.setText("Message: " + message);
 
 		}
@@ -162,6 +149,7 @@ public class Fisga_main extends Activity implements OnClickListener {
 		@Override
 		public void onAccuracyChanged(Sensor sensor, int accuracy) {
 			// TODO Auto-generated method stub
+
 		}
 	};
 
@@ -198,8 +186,8 @@ public class Fisga_main extends Activity implements OnClickListener {
 	private void initSounds() {
 		soundPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 100);
 		soundPoolMap = new HashMap<Integer, Integer>();
-		soundPoolMap.put(SOUND_EXPLOSION, soundPool.load(getBaseContext(),
-				R.raw.laser_1, 1));
+		soundPoolMap.put(SOUND_EXPLOSION,
+				soundPool.load(getBaseContext(), R.raw.laser_1, 1));
 	}
 
 	public void playSound(int sound) {
@@ -246,11 +234,11 @@ public class Fisga_main extends Activity implements OnClickListener {
 			sensorrunning = false;
 			connected = false;
 		}
+
 	}
 
 	@Override
 	public void onClick(View v) {
-		// Lançar o Barcode Scanner
 		IntentIntegrator.initiateScan(this);
 	}
 
