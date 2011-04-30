@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<AbsoluteLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
->
-  <Button android:id="@+id/startgameBtn"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text=" Start Game "
-    android:layout_y="50px"
-    android:layout_x="80px">
-  </Button>
+<AbsoluteLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	
+	<ImageView 
+		android:id="@+id/fundo" 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+        android:scaleType="centerInside" />
+	
+	<Button 
+		android:id="@+id/startgameBtn" 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:text=" Start Game "
+		android:layout_y="50px" 
+		android:layout_x="80px" />
 
-  <Button android:id="@+id/exitBtn"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="    Exit    "
-    android:layout_y="150px"
-    android:layout_x="80px">
-  </Button>
+	<Button 
+		android:id="@+id/exitBtn" 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:text="    Exit    "
+		android:layout_y="150px" 
+		android:layout_x="80px" />
+
 
 </AbsoluteLayout>
