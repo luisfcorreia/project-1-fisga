@@ -21,24 +21,26 @@
 	<item android:drawable="@drawable/file28" android:duration="50" />
 	<item android:drawable="@drawable/file29" android:duration="50" />
 	<item android:drawable="@drawable/file30" android:duration="50" />
-	<item android:drawable="@drawable/file31" android:duration="50" />
-	<item android:drawable="@drawable/file32" android:duration="50" />
-	<item android:drawable="@drawable/file33" android:duration="50" />
-	<item android:drawable="@drawable/file34" android:duration="50" />
-	<item android:drawable="@drawable/file35" android:duration="50" />
-	<item android:drawable="@drawable/file36" android:duration="50" />
-	<item android:drawable="@drawable/file37" android:duration="50" />
-	<item android:drawable="@drawable/file38" android:duration="50" />
-	<item android:drawable="@drawable/file39" android:duration="50" />
-	<item android:drawable="@drawable/file40" android:duration="50" />
-	<item android:drawable="@drawable/file41" android:duration="50" />
-	<item android:drawable="@drawable/file42" android:duration="50" />
-	<item android:drawable="@drawable/file43" android:duration="50" />
-	<item android:drawable="@drawable/file44" android:duration="50" />
-	<item android:drawable="@drawable/file45" android:duration="50" />
-	<item android:drawable="@drawable/file46" android:duration="50" />
-	<item android:drawable="@drawable/file47" android:duration="50" />
-	<item android:drawable="@drawable/file48" android:duration="50" />
-	<item android:drawable="@drawable/file49" android:duration="50" />
+	<item android:drawable="@drawable/file30" android:duration="50" />
+	<item android:drawable="@drawable/file29" android:duration="50" />
+	<item android:drawable="@drawable/file28" android:duration="50" />
+	<item android:drawable="@drawable/file27" android:duration="50" />
+	<item android:drawable="@drawable/file26" android:duration="50" />
+	<item android:drawable="@drawable/file25" android:duration="50" />
+	<item android:drawable="@drawable/file24" android:duration="50" />
+	<item android:drawable="@drawable/file23" android:duration="50" />
+	<item android:drawable="@drawable/file22" android:duration="50" />
+	<item android:drawable="@drawable/file21" android:duration="50" />
+	<item android:drawable="@drawable/file20" android:duration="50" />
+	<item android:drawable="@drawable/file19" android:duration="50" />
+	<item android:drawable="@drawable/file18" android:duration="50" />
+	<item android:drawable="@drawable/file17" android:duration="50" />
+	<item android:drawable="@drawable/file16" android:duration="50" />
+	<item android:drawable="@drawable/file15" android:duration="50" />
+	<item android:drawable="@drawable/file14" android:duration="50" />
+	<item android:drawable="@drawable/file13" android:duration="50" />
+	<item android:drawable="@drawable/file12" android:duration="50" />
+	<item android:drawable="@drawable/file11" android:duration="50" />
+	<item android:drawable="@drawable/file10" android:duration="50" />
 </animation-list>
 

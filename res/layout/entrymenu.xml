@@ -9,7 +9,9 @@
 		android:id="@+id/fundo" 
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"		 
-        android:scaleType="centerInside" />
+        android:scaleType="centerInside"
+        android:background="@drawable/background"
+        />
 	
 	<Button 
 		android:id="@+id/startgameBtn" 
