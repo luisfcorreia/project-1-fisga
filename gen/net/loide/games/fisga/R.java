@@ -33,26 +33,7 @@ public final class R {
         public static final int file28=0x7f020013;
         public static final int file29=0x7f020014;
         public static final int file30=0x7f020015;
-        public static final int file31=0x7f020016;
-        public static final int file32=0x7f020017;
-        public static final int file33=0x7f020018;
-        public static final int file34=0x7f020019;
-        public static final int file35=0x7f02001a;
-        public static final int file36=0x7f02001b;
-        public static final int file37=0x7f02001c;
-        public static final int file38=0x7f02001d;
-        public static final int file39=0x7f02001e;
-        public static final int file40=0x7f02001f;
-        public static final int file41=0x7f020020;
-        public static final int file42=0x7f020021;
-        public static final int file43=0x7f020022;
-        public static final int file44=0x7f020023;
-        public static final int file45=0x7f020024;
-        public static final int file46=0x7f020025;
-        public static final int file47=0x7f020026;
-        public static final int file48=0x7f020027;
-        public static final int file49=0x7f020028;
-        public static final int icon=0x7f020029;
+        public static final int icon=0x7f020016;
     }
     public static final class id {
         public static final int button1=0x7f070007;
