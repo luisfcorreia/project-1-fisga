@@ -23,10 +23,13 @@ public class Entrymenu extends Activity implements OnClickListener {
 		// set its background to our AnimationDrawable XML resource.
 		ImageView img = (ImageView)findViewById(R.id.fundo);
 		img.setBackgroundResource(R.drawable.background);
-		AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
-		frameAnimation.setOneShot(false);
-		frameAnimation.start();
 
+		// Get the background, which has been compiled to an AnimationDrawable object.
+		AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
+
+		// Start the animation (looped playback by default).
+		frameAnimation.start();
+		
 		Button button1 = (Button) findViewById(R.id.startgameBtn);
 		Button button2 = (Button) findViewById(R.id.exitBtn);
 
