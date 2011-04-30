@@ -21,14 +21,14 @@ public class Entrymenu extends Activity implements OnClickListener {
 		// requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.entrymenu);
 
-		h.sendEmptyMessageDelayed(0, 500);
-		
 		Button button1 = (Button) findViewById(R.id.startgameBtn);
 		Button button2 = (Button) findViewById(R.id.exitBtn);
 
 		button1.setOnClickListener(this);        
 		button2.setOnClickListener(this);        
 	
+		h.sendEmptyMessageDelayed(0, 100);
+		
 	}
 	
 	Handler h = new Handler() {
