@@ -36,19 +36,20 @@ public final class R {
         public static final int icon=0x7f020016;
     }
     public static final class id {
-        public static final int button1=0x7f070007;
-        public static final int dados=0x7f070006;
-        public static final int exit=0x7f07000c;
-        public static final int exitBtn=0x7f070002;
+        public static final int button1=0x7f070008;
+        public static final int dados=0x7f070007;
+        public static final int exit=0x7f07000d;
+        public static final int exitBtn=0x7f070003;
         public static final int fundo=0x7f070000;
-        public static final int help=0x7f07000b;
-        public static final int new_game=0x7f070009;
-        public static final int options=0x7f07000a;
+        public static final int help=0x7f07000c;
+        public static final int new_game=0x7f07000a;
+        public static final int options=0x7f07000b;
+        public static final int scanserverBtn=0x7f070002;
         public static final int startgameBtn=0x7f070001;
-        public static final int textView1=0x7f070008;
-        public static final int textazimuth=0x7f070003;
-        public static final int textpitch=0x7f070004;
-        public static final int textroll=0x7f070005;
+        public static final int textView1=0x7f070009;
+        public static final int textazimuth=0x7f070004;
+        public static final int textpitch=0x7f070005;
+        public static final int textroll=0x7f070006;
     }
     public static final class layout {
         public static final int entrymenu=0x7f030000;

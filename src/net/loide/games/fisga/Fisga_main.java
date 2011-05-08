@@ -25,11 +25,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Fisga_main extends Activity implements OnClickListener {
+public class Fisga_main extends Activity {
 	private static SensorManager mySensorManager;
 	private boolean sensorrunning;
 	private Vibrator vibrator;
@@ -72,10 +71,9 @@ public class Fisga_main extends Activity implements OnClickListener {
 		initSounds();
 		message = "0";
 		mood_change = 10;
-		
-		Button button = (Button) findViewById(R.id.button1);
-		button.setOnClickListener(this);
 
+		serverIpAddress = Entrymenu.serverIP;
+		
 		mySensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		List<Sensor> mySensors = mySensorManager
 				.getSensorList(Sensor.TYPE_ORIENTATION);
@@ -235,11 +233,6 @@ public class Fisga_main extends Activity implements OnClickListener {
 			connected = false;
 		}
 
-	}
-
-	@Override
-	public void onClick(View v) {
-		IntentIntegrator.initiateScan(this);
 	}
 
 }

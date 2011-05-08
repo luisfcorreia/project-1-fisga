@@ -22,11 +22,19 @@
 		android:layout_x="80px" />
 
 	<Button 
+		android:id="@+id/scanserverBtn" 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:text=" Scan server "
+		android:layout_y="250px" 
+		android:layout_x="80px" />
+
+	<Button 
 		android:id="@+id/exitBtn" 
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content" 
 		android:text="    Exit    "
-		android:layout_y="150px" 
+		android:layout_y="350px" 
 		android:layout_x="80px" />
 
 
