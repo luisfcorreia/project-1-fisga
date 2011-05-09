@@ -31,23 +31,15 @@ public class Battlefield extends Activity {
 		mPaint.setStrokeCap(Paint.Cap.ROUND);
 		mPaint.setStrokeWidth(12);
 
-		mEmboss = new EmbossMaskFilter(new float[] { 1, 1, 1 }, 0.4f, 6, 3.5f);
-
-		mBlur = new BlurMaskFilter(8, BlurMaskFilter.Blur.NORMAL);
 	}
 
 	private Paint mPaint;
-	private MaskFilter mEmboss;
-	private MaskFilter mBlur;
 
 	public void colorChanged(int color) {
 		mPaint.setColor(color);
 	}
 
 	public class MyView extends View {
-
-		private static final float MINP = 0.25f;
-		private static final float MAXP = 0.75f;
 
 		private Bitmap mBitmap;
 		private Canvas mCanvas;
@@ -64,7 +56,8 @@ public class Battlefield extends Activity {
 		@Override
 		protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 			super.onSizeChanged(w, h, oldw, oldh);
-			mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+//			mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+			mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.terreno);
 			mCanvas = new Canvas(mBitmap);
 		}
 
@@ -74,7 +67,12 @@ public class Battlefield extends Activity {
 
 			canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
 
-			canvas.drawPath(mPath, mPaint);
+//			canvas.drawPath(mPath, mPaint);
+			
+			canvas.drawLine(0, 0, 240, mY, mPaint);
+			canvas.drawLine(480, 0, 240, mY, mPaint);
+			
+			
 		}
 
 		private float mX, mY;
@@ -100,7 +98,7 @@ public class Battlefield extends Activity {
 		private void touch_up() {
 			mPath.lineTo(mX, mY);
 			// commit the path to our offscreen
-			mCanvas.drawPath(mPath, mPaint);
+//			mCanvas.drawPath(mPath, mPaint);
 			// kill this so we don't double draw
 			mPath.reset();
 		}
