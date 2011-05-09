@@ -38,7 +38,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content" 
 		android:text=""
-		android:layout_y="700px" 
+		android:layout_y="730px" 
 		android:layout_x="380px"
 		android:background="@drawable/m03"
 		 />

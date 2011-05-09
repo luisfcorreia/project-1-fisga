@@ -6,6 +6,12 @@
 	android:versionName="1.0">
 	<application android:icon="@drawable/fisga" android:label="@string/app_name">
 		<activity 
+			android:name="Battlefield" 
+			android:label="@string/app_name"
+			android:screenOrientation="portrait"
+			android:theme="@android:style/Theme.NoTitleBar">
+		</activity>
+		<activity 
 			android:name="Entrymenu" 
 			android:label="@string/app_name"
 			android:screenOrientation="portrait"

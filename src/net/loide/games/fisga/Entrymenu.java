@@ -18,6 +18,8 @@ import android.os.Message;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,6 +34,10 @@ public class Entrymenu extends Activity implements OnClickListener {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.entrymenu);
@@ -73,19 +79,16 @@ public class Entrymenu extends Activity implements OnClickListener {
 						Toast.LENGTH_LONG).show();
 				break;
 			} else {
-				Intent myIntent = new Intent(Entrymenu.this, Fisga_main.class);
-				try {
-					Entrymenu.this.startActivity(myIntent);
-
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
+ 				Intent myIntent = new Intent(Entrymenu.this, Fisga_main.class);
+				Entrymenu.this.startActivity(myIntent);
+				
 				break;
 			}
 
 		case R.id.scanserverBtn:
-			// handle button A click;
+			// Ler um QR_Code
 			IntentIntegrator.initiateScan(this);
+			
 			break;
 
 		case R.id.exitBtn:

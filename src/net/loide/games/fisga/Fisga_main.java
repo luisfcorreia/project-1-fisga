@@ -24,6 +24,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,6 +56,10 @@ public class Fisga_main extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
 		super.onCreate(savedInstanceState);
 		// requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -207,6 +213,10 @@ public class Fisga_main extends Activity {
 		// Handle item selection
 		switch (item.getItemId()) {
 		case R.id.new_game:
+			
+			Intent myIntent = new Intent(Fisga_main.this, Battlefield.class);
+			Fisga_main.this.startActivity(myIntent);
+			
 			// newGame();
 			return true;
 		case R.id.help:
