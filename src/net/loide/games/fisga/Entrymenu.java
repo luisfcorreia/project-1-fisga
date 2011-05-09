@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -33,40 +34,23 @@ public class Entrymenu extends Activity implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-
-		// requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.entrymenu);
 
 		Button button1 = (Button) findViewById(R.id.startgameBtn);
 		Button button2 = (Button) findViewById(R.id.scanserverBtn);
 		Button button3 = (Button) findViewById(R.id.exitBtn);
-		
-		
-		button1.setVisibility(4);
+
+		button1.setVisibility(View.INVISIBLE);
 
 		button1.setOnClickListener(this);
 		button2.setOnClickListener(this);
 		button3.setOnClickListener(this);
 
+		// iniciar a animação daqui a 500mS
 		h.sendEmptyMessageDelayed(0, 500);
 
 	}
-/*	
-	 private class myView extends View{
 
-		 public myView(Context context) {
-		  super(context);
-		  // TODO Auto-generated constructor stub
-		 }
-
-		 @Override
-		 protected void onDraw(Canvas canvas) {
-		  // TODO Auto-generated method stub
-		  Bitmap myBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.01);
-		          canvas.drawBitmap(myBitmap, 0, 0, null);
-		 }	
-	 }
-*/
 	Handler h = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -90,7 +74,12 @@ public class Entrymenu extends Activity implements OnClickListener {
 				break;
 			} else {
 				Intent myIntent = new Intent(Entrymenu.this, Fisga_main.class);
-				Entrymenu.this.startActivity(myIntent);
+				try {
+					Entrymenu.this.startActivity(myIntent);
+
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 				break;
 			}
 
@@ -108,46 +97,47 @@ public class Entrymenu extends Activity implements OnClickListener {
 
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		boolean validIP = false;
-		IntentResult scanResult = IntentIntegrator.parseActivityResult(
-				requestCode, resultCode, intent);
-		if (scanResult != null) {
-			// handle scan result
-			scannedTextType = scanResult.getFormatName().trim();
+		// testar o resultado da chamada ZXing BarCodeScanner
+		if (resultCode == RESULT_OK) {
 
-			if (scannedTextType.compareTo("QR_CODE") == 0) {
-				scannedText = scanResult.getContents().trim();
+			IntentResult scanResult = IntentIntegrator.parseActivityResult(
+					requestCode, resultCode, intent);
+			if (scanResult != null) {
+				// handle scan result
+				scannedTextType = scanResult.getFormatName().trim();
 
-				// validar se o que foi recebido é de facto um IP
-				validIP = true;
-				if (!scannedText
-						.matches("^\\d{1,3}(\\.(\\d{1,3}(\\.(\\d{1,3}(\\.(\\d{1,3})?)?)?)?)?)?")) {
-					validIP = false;
-				} else {
-					String[] splits = scannedText.split("\\.");
-					for (int i = 0; i < splits.length; i++) {
-						if (Integer.valueOf(splits[i]) > 255) {
-							validIP = false;
+				if (scannedTextType.compareTo("QR_CODE") == 0) {
+					scannedText = scanResult.getContents().trim();
+
+					// validar se o que foi recebido é de facto um IP
+					validIP = true;
+					if (!scannedText
+							.matches("^\\d{1,3}(\\.(\\d{1,3}(\\.(\\d{1,3}(\\.(\\d{1,3})?)?)?)?)?)?")) {
+						validIP = false;
+					} else {
+						String[] splits = scannedText.split("\\.");
+						for (int i = 0; i < splits.length; i++) {
+							if (Integer.valueOf(splits[i]) > 255) {
+								validIP = false;
+							}
 						}
 					}
-				}
-				if (validIP) {
-					serverIP = scannedText;
-					Button button1 = (Button) findViewById(R.id.startgameBtn);
-					Button button2 = (Button) findViewById(R.id.scanserverBtn);
+					if (validIP) {
+						serverIP = scannedText;
+						Button button1 = (Button) findViewById(R.id.startgameBtn);
+						Button button2 = (Button) findViewById(R.id.scanserverBtn);
 
-					button1.setVisibility(0);
-					button2.setVisibility(4);
+						button1.setVisibility(View.VISIBLE);
+						button2.setVisibility(View.INVISIBLE);
 
-					Toast.makeText(this,
-							"resultado:" + scannedText + "-" + scannedTextType,
-							Toast.LENGTH_LONG).show();
+					} else {
+						Toast.makeText(this, "código inválido",
+								Toast.LENGTH_LONG).show();
+					}
 				} else {
 					Toast.makeText(this, "código inválido", Toast.LENGTH_LONG)
-					.show();
+							.show();
 				}
-			} else {
-				Toast.makeText(this, "código inválido", Toast.LENGTH_LONG)
-						.show();
 			}
 		}
 	}

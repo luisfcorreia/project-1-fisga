@@ -17,25 +17,32 @@
 		android:id="@+id/startgameBtn" 
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content" 
-		android:text=" Start Game "
+		android:text=""
 		android:layout_y="50px" 
-		android:layout_x="80px" />
+		android:layout_x="135px"
+		android:background="@drawable/m01"
+		 />
 
 	<Button 
 		android:id="@+id/scanserverBtn" 
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content" 
-		android:text=" Scan server "
+		android:text=""
 		android:layout_y="250px" 
-		android:layout_x="80px" />
+		android:layout_x="40px"
+		android:background="@drawable/m02"
+		 />
 
 	<Button 
 		android:id="@+id/exitBtn" 
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content" 
-		android:text="    Exit    "
-		android:layout_y="350px" 
-		android:layout_x="80px" />
+		android:text=""
+		android:layout_y="700px" 
+		android:layout_x="380px"
+		android:background="@drawable/m03"
+		 />
+
 
 
 </AbsoluteLayout>
