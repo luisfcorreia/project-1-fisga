@@ -6,7 +6,11 @@ import java.net.SocketException;
 import java.util.Enumeration;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,17 +40,33 @@ public class Entrymenu extends Activity implements OnClickListener {
 		Button button1 = (Button) findViewById(R.id.startgameBtn);
 		Button button2 = (Button) findViewById(R.id.scanserverBtn);
 		Button button3 = (Button) findViewById(R.id.exitBtn);
+		
+		
+		button1.setVisibility(4);
 
 		button1.setOnClickListener(this);
 		button2.setOnClickListener(this);
 		button3.setOnClickListener(this);
 
-		h.sendEmptyMessageDelayed(0, 100);
-
-		Toast.makeText(this, getLocalIpAddress(), Toast.LENGTH_LONG).show();
+		h.sendEmptyMessageDelayed(0, 500);
 
 	}
+/*	
+	 private class myView extends View{
 
+		 public myView(Context context) {
+		  super(context);
+		  // TODO Auto-generated constructor stub
+		 }
+
+		 @Override
+		 protected void onDraw(Canvas canvas) {
+		  // TODO Auto-generated method stub
+		  Bitmap myBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.01);
+		          canvas.drawBitmap(myBitmap, 0, 0, null);
+		 }	
+	 }
+*/
 	Handler h = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -112,6 +132,12 @@ public class Entrymenu extends Activity implements OnClickListener {
 				}
 				if (validIP) {
 					serverIP = scannedText;
+					Button button1 = (Button) findViewById(R.id.startgameBtn);
+					Button button2 = (Button) findViewById(R.id.scanserverBtn);
+
+					button1.setVisibility(0);
+					button2.setVisibility(4);
+
 					Toast.makeText(this,
 							"resultado:" + scannedText + "-" + scannedTextType,
 							Toast.LENGTH_LONG).show();

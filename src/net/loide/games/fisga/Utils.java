@@ -15,7 +15,7 @@ public class Utils {
 	public static final int SOUND_YOU_WIN = 2;
 	public static final int SOUND_YOU_LOSE = 3;
 
-	
+/*	
 	public void initSounds() {
 		soundPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 100);
 		soundPoolMap = new HashMap<Integer, Integer>();
@@ -31,4 +31,8 @@ public class Utils {
 				0, 1f);
 	}	
 	
+*/
+
 }
+
+
