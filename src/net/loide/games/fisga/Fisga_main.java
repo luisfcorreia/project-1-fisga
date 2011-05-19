@@ -127,7 +127,6 @@ public class Fisga_main extends Activity {
 
 	private SensorEventListener mySensorEventListener = new SensorEventListener() {
 
-		@Override
 		public void onSensorChanged(SensorEvent event) {
 
 			x = Math.round(event.values[0]);
@@ -150,7 +149,7 @@ public class Fisga_main extends Activity {
 
 		}
 
-		@Override
+	
 		public void onAccuracyChanged(Sensor sensor, int accuracy) {
 			// TODO Auto-generated method stub
 
