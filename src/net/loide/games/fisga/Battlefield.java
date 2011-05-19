@@ -3,9 +3,8 @@ package net.loide.games.fisga;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.*;
+import android.graphics.Bitmap.Config;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -26,61 +25,50 @@ public class Battlefield extends Activity {
 		mPaint.setAntiAlias(true);
 		mPaint.setDither(true);
 		mPaint.setColor(0xFFFF0000);
-		mPaint.setStyle(Paint.Style.STROKE);
-		mPaint.setStrokeJoin(Paint.Join.ROUND);
-		mPaint.setStrokeCap(Paint.Cap.ROUND);
 		mPaint.setStrokeWidth(12);
 
 	}
-
 	private Paint mPaint;
-
-	public void colorChanged(int color) {
-		mPaint.setColor(color);
-	}
 
 	public class MyView extends View {
 
-		private Bitmap mBitmap;
 		private Canvas mCanvas;
-		private Path mPath;
-		private Paint mBitmapPaint;
-
+		
 		public MyView(Context c) {
 			super(c);
 
-			mPath = new Path();
-			mBitmapPaint = new Paint(Paint.DITHER_FLAG);
 		}
 
-		@Override
-		protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-			super.onSizeChanged(w, h, oldw, oldh);
-//			mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-			mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.terreno);
-			mCanvas = new Canvas(mBitmap);
+		public void onCreate() {
+			Config conf = Bitmap.Config.ARGB_8888;
+			Bitmap mBitmap = Bitmap.createBitmap(480, 800, conf); 
+			setmCanvas(new Canvas(mBitmap));
 		}
 
 		@Override
 		protected void onDraw(Canvas canvas) {
-			canvas.drawColor(0xFFAAAAAA);
+			// desenhar topo e rodapé
+			mPaint.setColor(0xFF92C957);
+			canvas.drawRect(0, 0, 480, 80, mPaint);
+			canvas.drawRect(0, 720, 480, 800, mPaint);
 
-			canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
+			// desenhar f
+			mPaint.setColor(0xFFCDE3A1);
+			canvas.drawRect(0, 80, 480, 720, mPaint);
 
-//			canvas.drawPath(mPath, mPaint);
-			
-			canvas.drawLine(0, 0, 240, mY, mPaint);
-			canvas.drawLine(480, 0, 240, mY, mPaint);
-			
-			
+			// desenhar linha
+			mPaint.setColor(0xFF888888);
+			canvas.drawLine(200, mY, 280, mY, mPaint);
+
+			mPaint.setColor(0xFFFF0000);
+			canvas.drawLine(0, 0, 200, mY, mPaint);
+			canvas.drawLine(480, 0, 280, mY, mPaint);
 		}
 
 		private float mX, mY;
 		private static final float TOUCH_TOLERANCE = 4;
 
 		private void touch_start(float x, float y) {
-			mPath.reset();
-			mPath.moveTo(x, y);
 			mX = x;
 			mY = y;
 		}
@@ -89,18 +77,15 @@ public class Battlefield extends Activity {
 			float dx = Math.abs(x - mX);
 			float dy = Math.abs(y - mY);
 			if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
-				mPath.quadTo(mX, mY, (x + mX) / 2, (y + mY) / 2);
 				mX = x;
 				mY = y;
 			}
 		}
 
 		private void touch_up() {
-			mPath.lineTo(mX, mY);
-			// commit the path to our offscreen
-//			mCanvas.drawPath(mPath, mPaint);
-			// kill this so we don't double draw
-			mPath.reset();
+			//TODO send Y position to server
+			mX = 0;
+			mY = 0;
 		}
 
 		@Override
@@ -124,7 +109,13 @@ public class Battlefield extends Activity {
 			}
 			return true;
 		}
+
+		public void setmCanvas(Canvas mCanvas) {
+			this.mCanvas = mCanvas;
+		}
+
+		public Canvas getmCanvas() {
+			return mCanvas;
+		}
 	}
-
-
 }

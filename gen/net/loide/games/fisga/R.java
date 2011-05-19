@@ -38,7 +38,6 @@ public final class R {
         public static final int m01=0x7f020018;
         public static final int m02=0x7f020019;
         public static final int m03=0x7f02001a;
-        public static final int terreno=0x7f02001b;
     }
     public static final class id {
         public static final int button1=0x7f070009;
@@ -47,11 +46,11 @@ public final class R {
         public static final int exitBtn=0x7f070004;
         public static final int fundo=0x7f070001;
         public static final int help=0x7f07000d;
+        public static final int imageView1=0x7f070000;
         public static final int new_game=0x7f07000b;
         public static final int options=0x7f07000c;
         public static final int scanserverBtn=0x7f070003;
         public static final int startgameBtn=0x7f070002;
-        public static final int terreno=0x7f070000;
         public static final int textView1=0x7f07000a;
         public static final int textazimuth=0x7f070005;
         public static final int textpitch=0x7f070006;

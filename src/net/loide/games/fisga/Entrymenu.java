@@ -6,17 +6,12 @@ import java.net.SocketException;
 import java.util.Enumeration;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -86,7 +81,11 @@ public class Entrymenu extends Activity implements OnClickListener {
 
 		case R.id.scanserverBtn:
 			// Ler um QR_Code
-			IntentIntegrator.initiateScan(this);
+//			IntentIntegrator.initiateScan(this);
+
+			Intent myIntent = new Intent(Entrymenu.this, Battlefield.class);
+			Entrymenu.this.startActivity(myIntent);
+			
 			
 			break;
 
