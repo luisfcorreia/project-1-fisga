@@ -110,7 +110,7 @@ public class Battlefield extends Activity {
 			}
 		}
 
-		private void touch_up() {
+		private void touch_up() { 
 			String message = "";
 
 			// obter o ponto Y para calcular a força

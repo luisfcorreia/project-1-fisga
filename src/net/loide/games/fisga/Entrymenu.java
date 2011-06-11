@@ -129,10 +129,10 @@ public class Entrymenu extends Activity implements OnClickListener {
 
 		case R.id.scanserverBtn:
 			// Ler um QR_Code
-			// IntentIntegrator.initiateScan(this);
+			IntentIntegrator.initiateScan(this);
 
-			Intent myIntent = new Intent(Entrymenu.this, Battlefield.class);
-			Entrymenu.this.startActivity(myIntent);
+			//Intent myIntent = new Intent(Entrymenu.this, Battlefield.class);
+			//Entrymenu.this.startActivity(myIntent);
 
 			break;
 
@@ -154,8 +154,10 @@ public class Entrymenu extends Activity implements OnClickListener {
 				// handle scan result
 				scannedTextType = scanResult.getFormatName().trim();
 
+				
 				if (scannedTextType.compareTo("QR_CODE") == 0) {
 					scannedText = scanResult.getContents().trim();
+					Log.d("Scan", "Scanned text was: "+scannedText);
 
 					// validar se o que foi recebido é de facto um IP
 					validIP = true;
@@ -261,7 +263,4 @@ public class Entrymenu extends Activity implements OnClickListener {
 		soundPool.play(soundPoolMap.get(sound), streamVolume, streamVolume, 1,
 				0, 1f);
 	}
-
-
-
 }
