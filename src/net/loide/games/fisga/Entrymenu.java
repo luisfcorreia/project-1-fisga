@@ -121,6 +121,10 @@ public class Entrymenu extends Activity implements OnClickListener {
 						Toast.LENGTH_LONG).show();
 				break;
 			} else {
+				
+				// enviar mensagem para o servidor passar ao estado Jogo
+				Entrymenu.sendData("GAMESTART");
+				
 				Intent myIntent = new Intent(Entrymenu.this, Battlefield.class);
 				Entrymenu.this.startActivity(myIntent);
 
